@@ -31,7 +31,11 @@ bool CPUMonitor::initialize() {
     for (int i = 0; i < info.coreCount; ++i) {
         PDH_HCOUNTER counter;
         char path[256];
-        sprintf_s(path, "\\Processor(%d)\\%% Processor Time", i);
+        #ifdef _MSC_VER
+            sprintf_s(path, sizeof(path), "\\Processor(%d)\\%% Processor Time", i);
+        #else
+            snprintf(path, sizeof(path), "\\Processor(%d)\\%% Processor Time", i);
+        #endif
         if (PdhAddCounterA(query, path, 0, &counter) == ERROR_SUCCESS) {
             coreCounters.push_back(counter);
         }

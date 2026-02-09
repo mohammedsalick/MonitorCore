@@ -1,6 +1,7 @@
 #include "process_monitor.h"
 #include <tlhelp32.h>
 #include <algorithm>
+#include <cstring>
 
 ProcessMonitor::ProcessMonitor() : initialized(false), lastUpdateTime(0) {}
 
@@ -28,7 +29,12 @@ void ProcessMonitor::update() {
             
             // Get process name
             char processName[MAX_PATH];
-            strncpy_s(processName, pe32.szExeFile, MAX_PATH);
+            #ifdef _MSC_VER
+                strncpy_s(processName, MAX_PATH, pe32.szExeFile, _TRUNCATE);
+            #else
+                strncpy(processName, pe32.szExeFile, MAX_PATH - 1);
+                processName[MAX_PATH - 1] = '\0';
+            #endif
             proc.name = processName;
 
             // Get CPU and memory usage

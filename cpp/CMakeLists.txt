@@ -21,10 +21,21 @@ include_directories(include)
 
 # Windows-specific definitions
 if(WIN32)
+    # Set Windows SDK version if not specified
+    if(NOT CMAKE_SYSTEM_VERSION)
+        set(CMAKE_SYSTEM_VERSION 10.0)
+    endif()
+    
+    # Windows-specific compiler definitions
     add_definitions(-D_WIN32_WINNT=0x0A00)  # Windows 10+
     add_definitions(-DNTDDI_VERSION=0x0A000000)  # Windows 10 for netioapi.h
     add_definitions(-DWIN32_LEAN_AND_MEAN)
     add_definitions(-DNOMINMAX)
+    
+    # For MinGW, ensure we link against required libraries
+    if(MINGW)
+        add_definitions(-D__USE_MINGW_ANSI_STDIO=0)
+    endif()
 endif()
 
 # Create executable

@@ -8,14 +8,22 @@ echo Running CMake...
 cmake ..
 
 if %ERRORLEVEL% NEQ 0 (
-    echo CMake failed. Trying manual compilation...
+    echo CMake failed. Trying manual compilation with MSVC...
     cd ..
-    echo Compiling with g++...
-    g++ -std=c++17 -o monitor.exe src\*.cpp -Iinclude -lpdh -lpsapi -lwbemuuid -lcomsuppw -liphlpapi
+    
+    REM Try to find MSVC compiler
+    where cl >nul 2>&1
     if %ERRORLEVEL% EQU 0 (
-        echo Build successful! monitor.exe created.
+        echo Compiling with MSVC...
+        cl /EHsc /std:c++17 /Iinclude src\*.cpp /link pdh.lib psapi.lib wbemuuid.lib comsuppw.lib iphlpapi.lib ws2_32.lib /OUT:monitor.exe
+        if %ERRORLEVEL% EQU 0 (
+            echo Build successful! monitor.exe created.
+        ) else (
+            echo Build failed with MSVC.
+        )
     ) else (
-        echo Build failed. Please install MinGW or use Visual Studio.
+        echo MSVC compiler not found. Please install Visual Studio Build Tools or Visual Studio.
+        echo Alternatively, ensure CMake is properly configured.
     )
     exit /b
 )

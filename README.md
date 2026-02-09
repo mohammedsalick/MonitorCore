@@ -48,7 +48,7 @@ MonitorCore follows a modular architecture with clear separation of concerns:
          ▼
 ┌─────────────────┐
 │  C++ Monitor    │  ← Windows APIs (PDH, WMI, etc.)
-│  (Core Engine) │
+│  (Core Engine)  │
 └─────────────────┘
 ```
 
@@ -412,5 +412,3 @@ If you find this project useful, please give it a ⭐ on GitHub!
 ---
 
 **Built with ❤️ for system administrators and developers**
-#   M o n i t o r C o r e  
- 

@@ -75,6 +75,17 @@ MonitorCore follows a modular architecture with clear separation of concerns:
 
 ---
 
+## Screenshots
+
+![CPP Terminal](assets/MonitorCore1.png)
+![Python Terminal](assets/MonitorCore2.png)
+![Monitor.exe](assets/MonitorCore3.png)
+![Web Dashboard](assets/MonitorCore4.png)
+![Web Dashboard](assets/MonitorCore5.png)
+
+
+
+
 ## 🚀 Quick Start
 
 ### Prerequisites

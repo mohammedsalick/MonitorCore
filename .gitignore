@@ -1,0 +1,26 @@
+# Build outputs
+cpp/build/
+cpp/*.exe
+cpp/*.o
+cpp/*.obj
+
+# Python
+python/__pycache__/
+python/*.pyc
+python/.venv/
+python/venv/
+*.pyc
+__pycache__/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
